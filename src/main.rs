@@ -14,7 +14,7 @@ fn main() {
     let r = cli.login_and_run::<my_handler::MyHandler>(&mut handler);
     match r {
         Ok(_) => {}
-        Err(err) => panic!("Error: {}", err),
+        Err(err) => println!("Error: {}", err),
     }
 
     println!("{}", cli.get_name().unwrap());
