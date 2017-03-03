@@ -5,7 +5,7 @@ mod my_handler;
 
 fn main() {
     let api_key = env!("SLACK_MIKU_PLUS_API_TOKEN");
-    println!("set api key");
+    println!("set api key:{}", api_key);
 
     let mut handler = my_handler::MyHandler;
     let mut cli = slack::RtmClient::new(&api_key);
