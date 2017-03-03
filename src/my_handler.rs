@@ -42,7 +42,5 @@ impl slack::EventHandler for MyHandler {
 
     fn on_connect(&mut self, cli: &mut slack::RtmClient) {
         println!("on_connect");
-        //let _ = cli.send_message(CHANNEL, "テスト運用です");
-        println!("send msg");
     }
 }
