@@ -1,6 +1,6 @@
 extern crate slack;
 
-static CHANNEL: &'static str = "#test";
+static CHANNEL: &'static str = "#random";
 const KIND_OF_REPLY_TEXT: usize = 8;
 
 pub fn reply_message(cli: &mut slack::RtmClient, element: &str) {

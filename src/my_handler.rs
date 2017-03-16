@@ -15,8 +15,8 @@ impl slack::EventHandler for MyHandler {
                 raw_json: &str) {
         println!("on_event(event: {:?}, raw_json: {:?})", event, raw_json);
 
-        //#test channel id -> C45M040DA
-        if raw_json.contains("\"channel\":\"C45M040DA\"") {
+        //#random channel id -> C45SC46VC
+        if raw_json.contains("\"channel\":\"C45SC46VC\"") {
             //event -> JSON which user and text data include pick up
             if raw_json.contains("\"user\":") && raw_json.contains("\"text\":") {
                 //raw_json(str) -> json(JSON)
