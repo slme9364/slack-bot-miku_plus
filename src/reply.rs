@@ -13,8 +13,9 @@ pub fn reply_message(cli: &mut slack::RtmClient, element: &str) {
         let _ = cli.send_message(CHANNEL, "おはようございます〜\n今日も1日コーディング頑張りましょう！");
     }
     if element.contains("たのし") {
-        let _ = cli.send_message(CHANNEL,
-                                 "マスターが楽しいなら、私も嬉しいです♪");
+        let _ =
+            cli.send_message(CHANNEL,
+                             "マスターが楽しいなら、私も嬉しいです♪");
     }
     if element.contains("man miku_plus") || element.contains("miku_plus --help") {
         let _ =
