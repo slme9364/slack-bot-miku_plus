@@ -1,5 +1,5 @@
 [root]
-name = "og-slack-bot"
+name = "slack-bot-miku_plus"
 version = "0.1.0"
 dependencies = [
  "rustc-serialize 0.3.22 (registry+https://github.com/rust-lang/crates.io-index)",
