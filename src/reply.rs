@@ -26,7 +26,7 @@ pub fn reply_message(cli: &mut slack::RtmClient, element: &str) {
                                                           "お休みになられてはいかがですか？",
                                                           "お休みになられてはいかがですか？",
                                                           "対話型bot: miku_plusです\n気軽に話しかけてください♪ ",
-                                                          "対話型bot, miku_plusです\n気軽に話しかけてください♪ ",
+                                                          "対話型bot: miku_plusです\n気軽に話しかけてください♪ ",
                                                           "マスター、お呼びでしょうか？"];
 
     for i in 0..KIND_OF_REPLY_TEXT {
