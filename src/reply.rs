@@ -2,7 +2,8 @@ extern crate slack;
 
 //static CHANNEL: &'static str = "#random";
 static CHANNEL: &'static str = "#test";
-const KIND_OF_REPLY_TEXT: usize = 8;
+
+const KIND_OF_REPLY_TEXT: usize = 10;
 
 pub fn reply_message(cli: &mut slack::RtmClient, element: &str) {
 
@@ -11,6 +12,8 @@ pub fn reply_message(cli: &mut slack::RtmClient, element: &str) {
                                                             "進捗",
                                                             "おはよ",
                                                             "たのし",
+                                                            "ねむ",
+                                                            "眠",
                                                             "man miku_plus",
                                                             "miku_plus --help",
                                                             "miku_plus"];
@@ -20,6 +23,8 @@ pub fn reply_message(cli: &mut slack::RtmClient, element: &str) {
                                                           "進捗どうですか？",
                                                           "おはようございます〜\n今日も1日コーディング頑張りましょう！",
                                                           "マスターが楽しいなら、私も嬉しいです♪",
+                                                          "お休みになられてはいかがですか？",
+                                                          "お休みになられてはいかがですか？",
                                                           "対話型bot: miku_plusです\n気軽に話しかけてください♪ ",
                                                           "対話型bot, miku_plusです\n気軽に話しかけてください♪ ",
                                                           "マスター、お呼びでしょうか？"];
