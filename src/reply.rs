@@ -5,7 +5,7 @@ static CHANNEL: &'static str = "#test";
 
 const KIND_OF_REPLY_TEXT: usize = 10;
 
-pub fn reply_message(cli: &mut slack::RtmClient, element: &str) {
+pub fn reply_message(cli: &mut slack::RtmClient, text_data: &str) {
 
     let contain_text: [&'static str; KIND_OF_REPLY_TEXT] = ["疲れ",
                                                             "つかれ",
@@ -30,7 +30,7 @@ pub fn reply_message(cli: &mut slack::RtmClient, element: &str) {
                                                           "マスター、お呼びでしょうか？"];
 
     for i in 0..KIND_OF_REPLY_TEXT {
-        if element.contains(contain_text[i]) {
+        if text_data.contains(contain_text[i]) {
             let _ = cli.send_message(CHANNEL, reply_text[i]);
             return;
         }
