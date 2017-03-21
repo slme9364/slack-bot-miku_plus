@@ -1,7 +1,7 @@
 extern crate slack;
 
-//static CHANNEL: &'static str = "#random";
-static CHANNEL: &'static str = "#test";
+static CHANNEL: &'static str = "#random";
+//static CHANNEL: &'static str = "#test";
 
 const KIND_OF_REPLY_TEXT: usize = 10;
 
