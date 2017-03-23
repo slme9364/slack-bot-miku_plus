@@ -31,7 +31,10 @@ pub fn reply_message(cli: &mut slack::RtmClient, text_data: &str) {
 
     for i in 0..KIND_OF_REPLY_TEXT {
         if text_data.contains(contain_text[i]) {
-            let _ = cli.send_message(CHANNEL, reply_text[i]);
+            match cli.send_message(CHANNEL, reply_text[i]) {
+                Ok(_) => println!("sending_message"),
+                Err(_) => return,
+            }
             return;
         }
     }
