@@ -33,7 +33,7 @@ pub fn reply_message(cli: &mut slack::RtmClient, text_data: &str) {
         if text_data.contains(contain_text[i]) {
             match cli.send_message(CHANNEL, reply_text[i]) {
                 Ok(_) => println!("sending_message"),
-                Err(_) => return,
+                Err(_) => println!("Error: can't send msg"),
             }
             return;
         }
