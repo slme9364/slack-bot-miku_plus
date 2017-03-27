@@ -16,30 +16,33 @@ impl slack::EventHandler for MyHandler {
         println!("on_event(event: {:?}, raw_json: {:?})", event, raw_json);
 
         //popuko and pipimi bot id -> U453MJ2HW
-        if !(raw_json.contains("\"user\":\"U453MJ2HW\"")) {
-            //#test   channel id -> C45M040DA
-            //if raw_json.contains("\"channel\":\"C45M040DA\"") {
+        //not action to popuko and pipimi
+        if raw_json.contains("\"user\":\"U453MJ2HW\"") {
+            return;
+        }
 
-            //#random channel id -> C45SC46VC
-            if raw_json.contains("\"channel\":\"C45SC46VC\"") {
-                //event -> JSON which user and text data include pick up
-                if raw_json.contains("\"user\":") && raw_json.contains("\"text\":") {
-                    //raw_json(str) -> json(JSON)
-                    let json = match Json::from_str(raw_json) {
-                        Ok(val) => val,
-                        Err(_) => return,
-                    };
-                    //text data in json pick up
-                    let text_data = match json.find("text") {
-                        Some(val) => val,
-                        None => return,
-                    };
-                    //text data cast json data to str
-                    let text_string = text_data.to_string();
-                    let text_str = text_string.as_str();
+        //#test   channel id -> C45M040DA
+        //if raw_json.contains("\"channel\":\"C45M040DA\"") {
 
-                    reply::reply_message(cli, text_str);
-                }
+        //#random channel id -> C45SC46VC
+        if raw_json.contains("\"channel\":\"C45SC46VC\"") {
+            //event -> JSON which user and text data include pick up
+            if raw_json.contains("\"user\":") && raw_json.contains("\"text\":") {
+                //raw_json(str) -> json(JSON)
+                let json = match Json::from_str(raw_json) {
+                    Ok(val) => val,
+                    Err(_) => return,
+                };
+                //text data in json pick up
+                let text_data = match json.find("text") {
+                    Some(val) => val,
+                    None => return,
+                };
+                //text data cast json data to str
+                let text_string = text_data.to_string();
+                let text_str = text_string.as_str();
+
+                reply::reply_message(cli, text_str);
             }
         }
     }
