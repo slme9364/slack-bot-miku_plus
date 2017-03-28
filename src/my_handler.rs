@@ -6,7 +6,6 @@ use reply;
 
 pub struct MyHandler;
 
-#[allow(unused_variables)]
 impl slack::EventHandler for MyHandler {
     //if user action in slack
     fn on_event(&mut self,
