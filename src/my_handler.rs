@@ -20,29 +20,23 @@ impl slack::EventHandler for MyHandler {
             return;
         }
 
-        //#test   channel id -> C45M040DA
-        //if raw_json.contains("\"channel\":\"C45M040DA\"") {
+        //pick up user and text relating data
+        if pick_up_user_action(raw_json) {
+            //raw_json(str) -> json(JSON)
+            let json = match Json::from_str(raw_json) {
+                Ok(val) => val,
+                Err(_) => return,
+            };
+            //text data in json pick up
+            let text_data = match json.find("text") {
+                Some(val) => val,
+                None => return,
+            };
+            //text data cast json data to str
+            let text_string = text_data.to_string();
+            let text_str = text_string.as_str();
 
-        //#random channel id -> C45SC46VC
-        if raw_json.contains("\"channel\":\"C45SC46VC\"") {
-            //event -> JSON which user and text data include pick up
-            if raw_json.contains("\"user\":") && raw_json.contains("\"text\":") {
-                //raw_json(str) -> json(JSON)
-                let json = match Json::from_str(raw_json) {
-                    Ok(val) => val,
-                    Err(_) => return,
-                };
-                //text data in json pick up
-                let text_data = match json.find("text") {
-                    Some(val) => val,
-                    None => return,
-                };
-                //text data cast json data to str
-                let text_string = text_data.to_string();
-                let text_str = text_string.as_str();
-
-                reply::reply_message(cli, text_str);
-            }
+            reply::reply_message(cli, text_str);
         }
     }
 
@@ -60,4 +54,18 @@ impl slack::EventHandler for MyHandler {
     fn on_connect(&mut self, cli: &mut slack::RtmClient) {
         println!("on_connect");
     }
+}
+
+fn pick_up_user_action(raw_json: &str) -> bool {
+    //#test   channel id -> C45M040DA
+    //if raw_json.contains("\"channel\":\"C45M040DA\"") {
+
+    //#random channel id -> C45SC46VC
+    if raw_json.contains("\"channel\":\"C45SC46VC\"") {
+        //event -> JSON which user and text data include pick up
+        if raw_json.contains("\"user\":") && raw_json.contains("\"text\":") {
+            true
+        }
+    }
+    false
 }
