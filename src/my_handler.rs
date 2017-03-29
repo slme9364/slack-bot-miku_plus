@@ -4,6 +4,21 @@ extern crate rustc_serialize;
 use self::rustc_serialize::json::Json;
 use reply;
 
+fn pick_up_user_action(raw_json: &str) -> bool {
+    //#test   channel id -> C45M040DA
+    //if raw_json.contains("\"channel\":\"C45M040DA\"") {
+
+    //#random channel id -> C45SC46VC
+    if raw_json.contains("\"channel\":\"C45SC46VC\"") {
+        //event -> JSON which user and text data include pick up
+        if raw_json.contains("\"user\":") && raw_json.contains("\"text\":") {
+            true
+        }
+    }
+    false
+}
+
+
 pub struct MyHandler;
 
 impl slack::EventHandler for MyHandler {
@@ -54,18 +69,4 @@ impl slack::EventHandler for MyHandler {
     fn on_connect(&mut self, cli: &mut slack::RtmClient) {
         println!("on_connect");
     }
-}
-
-fn pick_up_user_action(raw_json: &str) -> bool {
-    //#test   channel id -> C45M040DA
-    //if raw_json.contains("\"channel\":\"C45M040DA\"") {
-
-    //#random channel id -> C45SC46VC
-    if raw_json.contains("\"channel\":\"C45SC46VC\"") {
-        //event -> JSON which user and text data include pick up
-        if raw_json.contains("\"user\":") && raw_json.contains("\"text\":") {
-            true
-        }
-    }
-    false
 }
