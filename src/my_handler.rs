@@ -12,7 +12,7 @@ fn pick_up_user_action(raw_json: &str) -> bool {
     if raw_json.contains("\"channel\":\"C45SC46VC\"") {
         //event -> JSON which user and text data include pick up
         if raw_json.contains("\"user\":") && raw_json.contains("\"text\":") {
-            true
+            return true;
         }
     }
     false
