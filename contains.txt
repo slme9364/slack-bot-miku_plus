@@ -1,0 +1,10 @@
+疲れ
+つかれ
+進捗
+おはよ
+たのし
+ねむ
+眠
+man miku_plus
+miku_plus --help
+miku_plus

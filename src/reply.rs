@@ -1,41 +1,67 @@
 extern crate slack;
 
+use std::fs::File;
+use std::path::Path;
+use std::io::prelude::*;
+use std::str;
+
 static CHANNEL: &'static str = "#random";
 //static CHANNEL: &'static str = "#test";
 
-const KIND_OF_REPLY_TEXT: usize = 10;
+fn contains_msg(msg: &str) -> Option<usize> {
+    let file_path = Path::new("contains.txt");
+    let mut file = match File::open(&file_path) {
+        Err(_) => return None,
+        Ok(file) => file,
+    };
+
+    let mut contain_string = String::new();
+    let _ = match file.read_to_string(&mut contain_string) {
+        Err(_) => return None,
+        Ok(val) => val,
+    };
+    let contain_str = contain_string.as_str();
+    let contain_vec: Vec<&str> = contain_str.split('\n').collect();
+
+    for i in 0..contain_vec.len() {
+        if msg.contains(contain_vec[i]) {
+            return Some(i);
+        }
+    }
+    None
+}
+
+fn get_reply_msg(index: usize) -> Option<String> {
+    let file_path = Path::new("reply_msg.txt");
+    let mut file = match File::open(&file_path) {
+        Err(_) => return None,
+        Ok(file) => file,
+    };
+
+    let mut reply_string = String::new();
+    let _ = match file.read_to_string(&mut reply_string) {
+        Err(_) => return None,
+        Ok(val) => val,
+    };
+    let reply_str = reply_string.as_str();
+    let reply_vec: Vec<&str> = reply_str.split('\n').collect();
+    let reply_text = reply_vec[index].replace("\\n", "\n");
+
+    Some(reply_text)
+}
 
 pub fn reply_message(cli: &mut slack::RtmClient, text_data: &str) {
-
-    let contain_text: [&'static str; KIND_OF_REPLY_TEXT] = ["疲れ",
-                                                            "つかれ",
-                                                            "進捗",
-                                                            "おはよ",
-                                                            "たのし",
-                                                            "ねむ",
-                                                            "眠",
-                                                            "man miku_plus",
-                                                            "miku_plus --help",
-                                                            "miku_plus"];
-
-    let reply_text: [&'static str; KIND_OF_REPLY_TEXT] = ["お疲れ様です、マスター♪ ",
-                                                          "お疲れ様です、マスター♪ ",
-                                                          "進捗どうですか？",
-                                                          "おはようございます〜\n今日も1日コーディング頑張りましょう！",
-                                                          "マスターが楽しいなら、私も嬉しいです♪",
-                                                          "お休みになられてはいかがですか？",
-                                                          "お休みになられてはいかがですか？",
-                                                          "対話型bot: miku_plusです\n気軽に話しかけてください♪ ",
-                                                          "対話型bot: miku_plusです\n気軽に話しかけてください♪ ",
-                                                          "マスター、お呼びでしょうか？"];
-
-    for i in 0..KIND_OF_REPLY_TEXT {
-        if text_data.contains(contain_text[i]) {
-            match cli.send_message(CHANNEL, reply_text[i]) {
-                Ok(_) => println!("sending_message"),
-                Err(_) => println!("Error: can't send msg"),
-            }
-            return;
-        }
+    let index = match contains_msg(text_data) {
+        Some(index) => index,
+        None => return,
+    };
+    let reply_text = match get_reply_msg(index) {
+        Some(text) => text,
+        None => return,
+    };
+    let reply_text_str = reply_text.as_str();
+    match cli.send_message(CHANNEL, reply_text_str) {
+        Ok(_) => println!("sending_message"),
+        Err(_) => println!("Error: can't send msg"),
     }
 }
