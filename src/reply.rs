@@ -11,14 +11,14 @@ static CHANNEL: &'static str = "#random";
 fn contains_msg(msg: &str) -> Option<usize> {
     let file_path = Path::new("contains.txt");
     let mut file = match File::open(&file_path) {
-        Err(_) => return None,
         Ok(file) => file,
+        Err(_) => return None,
     };
 
     let mut contain_string = String::new();
     let _ = match file.read_to_string(&mut contain_string) {
-        Err(_) => return None,
         Ok(val) => val,
+        Err(_) => return None,
     };
     let contain_str = contain_string.as_str();
     let contain_vec: Vec<&str> = contain_str.split('\n').collect();
@@ -34,14 +34,14 @@ fn contains_msg(msg: &str) -> Option<usize> {
 fn get_reply_msg(index: usize) -> Option<String> {
     let file_path = Path::new("reply_msg.txt");
     let mut file = match File::open(&file_path) {
-        Err(_) => return None,
         Ok(file) => file,
+        Err(_) => return None,
     };
 
     let mut reply_string = String::new();
     let _ = match file.read_to_string(&mut reply_string) {
-        Err(_) => return None,
         Ok(val) => val,
+        Err(_) => return None,
     };
     let reply_str = reply_string.as_str();
     let reply_vec: Vec<&str> = reply_str.split('\n').collect();
