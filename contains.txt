@@ -5,6 +5,7 @@
 たのし
 ねむ
 眠
+寝
 man miku_plus
 miku_plus --help
 miku_plus
