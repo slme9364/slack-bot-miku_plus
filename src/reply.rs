@@ -9,7 +9,7 @@ static CHANNEL: &'static str = "#random";
 //static CHANNEL: &'static str = "#test";
 
 fn contains_msg(msg: &str) -> Option<usize> {
-    let file_path = Path::new("contains.txt");
+    let file_path = Path::new("doc/contains.txt");
     let mut file = match File::open(&file_path) {
         Ok(file) => file,
         Err(_) => return None,
@@ -32,7 +32,7 @@ fn contains_msg(msg: &str) -> Option<usize> {
 }
 
 fn get_reply_msg(index: usize) -> Option<String> {
-    let file_path = Path::new("reply_msg.txt");
+    let file_path = Path::new("doc/reply_msg.txt");
     let mut file = match File::open(&file_path) {
         Ok(file) => file,
         Err(_) => return None,
