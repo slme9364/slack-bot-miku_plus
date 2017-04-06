@@ -8,6 +8,7 @@ use std::str;
 static CHANNEL: &'static str = "#random";
 //static CHANNEL: &'static str = "#test";
 
+//get contains keywords from doc/contains.txt
 fn contains_msg(msg: &str) -> Option<usize> {
     let file_path = Path::new("doc/contains.txt");
     let mut file = match File::open(&file_path) {
@@ -20,9 +21,11 @@ fn contains_msg(msg: &str) -> Option<usize> {
         Ok(val) => val,
         Err(_) => return None,
     };
+
     let contain_str = contain_string.as_str();
     let contain_vec: Vec<&str> = contain_str.split('\n').collect();
 
+    //find contains keywords
     for i in 0..contain_vec.len() {
         if msg.contains(contain_vec[i]) {
             return Some(i);
@@ -31,6 +34,7 @@ fn contains_msg(msg: &str) -> Option<usize> {
     None
 }
 
+//get reply msg from doc/reply_msg.txt
 fn get_reply_msg(index: usize) -> Option<String> {
     let file_path = Path::new("doc/reply_msg.txt");
     let mut file = match File::open(&file_path) {
@@ -49,6 +53,7 @@ fn get_reply_msg(index: usize) -> Option<String> {
 
     Some(reply_text)
 }
+
 
 pub fn reply_message(cli: &mut slack::RtmClient, text_data: &str) {
     let index = match contains_msg(text_data) {
