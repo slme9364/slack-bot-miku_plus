@@ -3,7 +3,7 @@ use std::str;
 
 
 pub fn get_username(text: &str) -> String {
-    let text_split: Vec<&str> = text.split(':').collect();
+    let text_split: Vec<&str> = text.split('=').collect();
     let username_str = text_split[1];
     let username = str::trim_matches(username_str, '\"');
     let username_string = username.to_string();
