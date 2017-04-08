@@ -1,5 +1,6 @@
 extern crate slack;
 
+mod github;
 mod reply;
 mod my_handler;
 

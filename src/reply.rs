@@ -4,6 +4,7 @@ use std::fs::File;
 use std::path::Path;
 use std::io::prelude::*;
 use std::str;
+use github;
 
 static CHANNEL: &'static str = "#random";
 //static CHANNEL: &'static str = "#test";
@@ -56,17 +57,24 @@ fn get_reply_msg(index: usize) -> Option<String> {
 
 
 pub fn reply_message(cli: &mut slack::RtmClient, text_data: &str) {
-    let index = match contains_msg(text_data) {
-        Some(index) => index,
-        None => return,
-    };
-    let reply_text = match get_reply_msg(index) {
-        Some(text) => text,
-        None => return,
-    };
-    let reply_text_str = reply_text.as_str();
-    match cli.send_message(CHANNEL, reply_text_str) {
-        Ok(_) => println!("sending_message"),
-        Err(_) => println!("Error: can't send msg"),
+    if text_data.contains("github=") {
+        let user = github::get_username(text_data);
+        let today_contribution = github::get_today_contribution(user);
+        let send_msg = today_contribution.as_str();
+        cli.send_message(CHANNEL, send_msg);
+    } else {
+        let index = match contains_msg(text_data) {
+            Some(index) => index,
+            None => return,
+        };
+        let reply_text = match get_reply_msg(index) {
+            Some(text) => text,
+            None => return,
+        };
+        let reply_text_str = reply_text.as_str();
+        match cli.send_message(CHANNEL, reply_text_str) {
+            Ok(_) => println!("sending_message"),
+            Err(_) => println!("Error: can't send msg"),
+        }
     }
 }
