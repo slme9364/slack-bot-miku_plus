@@ -121,7 +121,7 @@ pub fn get_today_contribution(username: String) -> String {
 
     //today_contribution judge
     if contributions_str.contains("data-count=\"0\"") || (contributions_str == "") {
-        return_string = "今日のContributionはまだです".to_string();
+        return_string = "今日のContributionを検知できませんでした".to_string();
     } else {
         return_string = "おめでとうございます!\n成功です!".to_string();
     }
