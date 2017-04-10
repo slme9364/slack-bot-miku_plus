@@ -2,10 +2,13 @@ use std::process::Command;
 use std::str;
 use date;
 
+//get username from text data
 pub fn get_username(text: &str) -> String {
     let text_split: Vec<&str> = text.split('=').collect();
+
     let username_split: Vec<&str> = text_split[1].split(' ').collect();
     let username_str = username_split[0];
+
     let username = str::trim_matches(username_str, '\"');
     let username_string = username.to_string();
     username_string
@@ -13,12 +16,12 @@ pub fn get_username(text: &str) -> String {
 
 fn get_contributions(username_string: String) -> Option<String> {
     let username = username_string.as_str();
+
     //get date
     let today_string = date::get_date();
     let today = today_string.as_str();
     println!("Today: {}", today);
 
-    //set username
     println!("User: {}", username);
 
     //get_contibution

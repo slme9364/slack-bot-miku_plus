@@ -21,6 +21,7 @@ fn num_month(month_str: &str) -> &str {
     }
 }
 
+//Align the format yyyy-mm-dd
 fn num_day(day_str: &str) -> &str {
     match day_str {
         "1" => "01",
@@ -36,6 +37,7 @@ fn num_day(day_str: &str) -> &str {
     }
 }
 
+//get date from date command
 pub fn get_date() -> String {
     let date_cmd = match Command::new("date").output() {
         Ok(date) => date,
