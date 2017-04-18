@@ -9,7 +9,15 @@ pub fn get_username(text: &str) -> String {
     let username_split: Vec<&str> = text_split[1].split(' ').collect();
     let username_str = username_split[0];
 
-    let username = str::trim_matches(username_str, '\"');
+    let mut username = str::trim_matches(username_str, '\"');
+    username = match username {
+        "slme" => "slme9364",
+        "ktr" => "lycoris0731",
+        "oichan" => "oisho0317",
+        "yyy" => "ywkw1717",
+        "kbd" => "kobad",
+        _ => username,
+    }
     let username_string = username.to_string();
     username_string
 }
