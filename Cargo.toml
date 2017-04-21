@@ -6,3 +6,4 @@ authors = ["slme9364 <ishikazu1104@yahoo.co.jp>"]
 [dependencies]
 slack = "0.16.0"
 rustc-serialize = "*"
+rand = "0.3"

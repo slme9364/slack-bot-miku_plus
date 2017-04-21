@@ -5,6 +5,7 @@ use std::path::Path;
 use std::io::prelude::*;
 use std::str;
 use github;
+use rnd_meal;
 
 static CHANNEL: &'static str = "#random";
 //static CHANNEL: &'static str = "#test";
@@ -67,6 +68,23 @@ pub fn reply_message(cli: &mut slack::RtmClient, text_data: &str) {
             Err(_) => println!("Error: can't send msg"),
         }
         return;
+    }
+
+    //get meal information
+    if text_data.contains("ごはんルーレット") {
+        //get lunch information
+        if text_data.contains("昼") {
+            let text_lunch = match rnd_meal::rnd_meal_lunch() {
+                Some(val) => val,
+                None => return,
+            };
+            let text_lunch_str = text_lunch.as_str();
+            match cli.send_message(CHANNEL, text_lunch_str) {
+                Ok(_) => println!("sending_message"),
+                Err(_) => println!("Error: can't send msg"),
+            }
+            return;
+        }
     }
 
     //not contain "github"

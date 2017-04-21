@@ -2,6 +2,7 @@ extern crate slack;
 
 mod date;
 mod github;
+mod rnd_meal;
 mod reply;
 mod my_handler;
 
