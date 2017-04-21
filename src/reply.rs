@@ -85,6 +85,18 @@ pub fn reply_message(cli: &mut slack::RtmClient, text_data: &str) {
             }
             return;
         }
+        if text_data.contains("夜") {
+            let text_dinner = match rnd_meal::rnd_meal_dinner() {
+                Some(val) => val,
+                None => return,
+            };
+            let text_dinner_str = text_dinner.as_str();
+            match cli.send_message(CHANNEL, text_dinner_str) {
+                Ok(_) => println!("sending_message"),
+                Err(_) => println!("Error: can't send msg"),
+            }
+            return;
+        }
     }
 
     //not contain "github"
