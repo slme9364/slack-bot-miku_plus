@@ -97,6 +97,19 @@ pub fn reply_message(cli: &mut slack::RtmClient, text_data: &str) {
             }
             return;
         }
+        if text_data.contains("カフェ") {
+            let text_cafe = match rnd_meal::rnd_cafe() {
+                Some(val) => val,
+                None => return,
+            };
+            let text_cafe_str = text_cafe.as_str();
+            match cli.send_message(CHANNEL, text_cafe_str) {
+                Ok(_) => println!("sending_message"),
+                Err(_) => println!("Error: can't send msg"),
+            }
+            return;
+        }
+
     }
 
     //not contain "github"
