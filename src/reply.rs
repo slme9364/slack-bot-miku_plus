@@ -85,6 +85,8 @@ pub fn reply_message(cli: &mut slack::RtmClient, text_data: &str) {
             }
             return;
         }
+
+        //get dinner information
         if text_data.contains("夜") {
             let text_dinner = match rnd_meal::rnd_meal_dinner() {
                 Some(val) => val,
@@ -97,6 +99,8 @@ pub fn reply_message(cli: &mut slack::RtmClient, text_data: &str) {
             }
             return;
         }
+
+        //get cafe information
         if text_data.contains("カフェ") {
             let text_cafe = match rnd_meal::rnd_cafe() {
                 Some(val) => val,
