@@ -116,7 +116,7 @@ pub fn reply_message(cli: &mut slack::RtmClient, text_data: &str) {
 
     }
 
-    //not contain "github"
+    //not use other function
     let index = match contains_msg(text_data) {
         Some(index) => index,
         None => return,
