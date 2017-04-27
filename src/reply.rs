@@ -72,10 +72,16 @@ pub fn reply_message(cli: &mut slack::RtmClient, text_data: &str) {
 
     //get meal information
     if text_data.contains("ごはんルーレット") {
+        match cli.send_message(CHANNEL, "今日の食事は") {
+            Ok(_) => println!("sending_message"),
+            Err(_) => println!("Error: can't send msg"),
+        }
+        let end_txt = "です！";
+
         //get lunch information
         if text_data.contains("昼") {
             let text_lunch = match rnd_meal::rnd_meal_lunch() {
-                Some(val) => val,
+                Some(val) => val + end_txt,
                 None => return,
             };
             let text_lunch_str = text_lunch.as_str();
@@ -89,7 +95,7 @@ pub fn reply_message(cli: &mut slack::RtmClient, text_data: &str) {
         //get dinner information
         if text_data.contains("夜") {
             let text_dinner = match rnd_meal::rnd_meal_dinner() {
-                Some(val) => val,
+                Some(val) => val + end_txt,
                 None => return,
             };
             let text_dinner_str = text_dinner.as_str();
@@ -103,7 +109,7 @@ pub fn reply_message(cli: &mut slack::RtmClient, text_data: &str) {
         //get cafe information
         if text_data.contains("カフェ") {
             let text_cafe = match rnd_meal::rnd_cafe() {
-                Some(val) => val,
+                Some(val) => val + end_txt,
                 None => return,
             };
             let text_cafe_str = text_cafe.as_str();
