@@ -6,10 +6,13 @@ use date;
 pub fn get_username(text: &str) -> String {
     let text_split: Vec<&str> = text.split('=').collect();
 
+    //espace directory traversal
     let username_split: Vec<&str> = text_split[1].split(' ').collect();
     let username_str = username_split[0];
 
     let mut username = str::trim_matches(username_str, '\"');
+
+    //alias github id
     username = match username {
         "slme" => "slme9364",
         "ktr" => "lycoris0731",
