@@ -72,9 +72,12 @@ pub fn reply_message(cli: &mut slack::RtmClient, text_data: &str) {
 
     //get meal information
     if text_data.contains("ごはんルーレット") {
-        match cli.send_message(CHANNEL, "今日の食事は") {
-            Ok(_) => println!("sending_message"),
-            Err(_) => println!("Error: can't send msg"),
+        if text_data.contains("昼") || text_data.contains("夜") ||
+           text_data.contains("カフェ") {
+            match cli.send_message(CHANNEL, "今日の食事は") {
+                Ok(_) => println!("sending_message"),
+                Err(_) => println!("Error: can't send msg"),
+            }
         }
         let end_txt = "です！";
 
