@@ -19,6 +19,7 @@ pub fn get_username(text: &str) -> String {
         "oichan" => "oisho0317",
         "yyy" => "ywkw1717",
         "kbd" => "kobad",
+        "yamasho" => "Yamasho",
         _ => username,
     };
     let username_string = username.to_string();
