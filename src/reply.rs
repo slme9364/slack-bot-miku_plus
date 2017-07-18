@@ -18,14 +18,13 @@ fn contains_msg(msg: &str) -> Option<usize> {
         Err(_) => return None,
     };
 
-    let mut contain_string = String::new();
-    let _ = match file.read_to_string(&mut contain_string) {
+    let mut contain = String::new();
+    let _ = match file.read_to_string(&mut contain) {
         Ok(val) => val,
         Err(_) => return None,
     };
 
-    let contain_str = contain_string.as_str();
-    let contain_vec: Vec<&str> = contain_str.split('\n').collect();
+    let contain_vec: Vec<&str> = contain.as_str().split('\n').collect();
 
     //find contains keywords
     for i in 0..contain_vec.len() {
@@ -44,13 +43,12 @@ fn get_reply_msg(index: usize) -> Option<String> {
         Err(_) => return None,
     };
 
-    let mut reply_string = String::new();
-    let _ = match file.read_to_string(&mut reply_string) {
+    let mut reply = String::new();
+    let _ = match file.read_to_string(&mut reply) {
         Ok(val) => val,
         Err(_) => return None,
     };
-    let reply_str = reply_string.as_str();
-    let reply_vec: Vec<&str> = reply_str.split('\n').collect();
+    let reply_vec: Vec<&str> = reply.as_str().split('\n').collect();
     let reply_text = reply_vec[index].replace("\\n", "\n");
 
     Some(reply_text)

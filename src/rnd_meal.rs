@@ -19,8 +19,7 @@ pub fn rnd_meal_lunch() -> Option<String> {
     };
 
     //string -> split('n') -> vector
-    let meal_str = meal_string.as_str();
-    let meal_vec: Vec<&str> = meal_str.split('\n').collect();
+    let meal_vec: Vec<&str> = meal_string.as_str().split('\n').collect();
 
     //select index by random engine
     let mut rnd = rand::thread_rng();
@@ -44,8 +43,7 @@ pub fn rnd_meal_dinner() -> Option<String> {
     };
 
     //string -> split('n') -> vector
-    let meal_str = meal_string.as_str();
-    let meal_vec: Vec<&str> = meal_str.split('\n').collect();
+    let meal_vec: Vec<&str> = meal_string.as_str().split('\n').collect();
 
     //select index by random engine
     let mut rnd = rand::thread_rng();
@@ -69,8 +67,7 @@ pub fn rnd_cafe() -> Option<String> {
     };
 
     //string -> split('n') -> vector
-    let cafe_str = cafe_string.as_str();
-    let cafe_vec: Vec<&str> = cafe_str.split('\n').collect();
+    let cafe_vec: Vec<&str> = cafe_string.as_str().split('\n').collect();
 
     //select index by random engine
     let mut rnd = rand::thread_rng();
