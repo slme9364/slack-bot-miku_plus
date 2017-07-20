@@ -9,6 +9,8 @@ mod my_handler;
 use std::time::Duration;
 use std::thread;
 
+
+#[allow(unused_variables, unreachable_code)]
 fn main() {
     //set api key
     let api_key = env!("SLACK_MIKU_PLUS_API_TOKEN");
