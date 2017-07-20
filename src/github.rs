@@ -78,3 +78,14 @@ pub fn get_today_contribution(username: String) -> String {
     }
     return_string
 }
+
+
+//test program
+#[test]
+fn collect_username() {
+    let slme = String::from("slme9364");
+    let get_user = get_username("github=slme");
+    assert!(slme.eq(&get_user));
+    let other_user = String::from("other_user");
+    assert!(other_user.eq(&get_username("github=other_user")));
+}

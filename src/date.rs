@@ -67,3 +67,16 @@ pub fn get_date() -> String {
 
     date_string
 }
+
+//test program
+
+#[test]
+fn collect_return_month() {
+    assert_eq!("01", num_month("Jan"));
+}
+
+#[test]
+fn collect_return_day() {
+    assert_eq!("01", num_day("1"));
+    assert_eq!("12", num_day("12"))
+}
