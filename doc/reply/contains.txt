@@ -10,3 +10,4 @@
 man miku_plus
 miku_plus --help
 miku_plus
+がんばるぞい
