@@ -54,6 +54,15 @@ fn get_reply_msg(index: usize) -> Option<String> {
     Some(reply_text)
 }
 
+fn is_meal_roulette(text_data: &str) -> bool {
+    let meal_words = ["ご飯", "ごはん", "めし"];
+    for word in meal_words.iter() {
+        if text_data.contains("ルーレット") && text_data.contains(word) {
+            return true;
+        }
+    }
+    false
+}
 
 pub fn reply_message(cli: &mut slack::RtmClient, text_data: &str) {
     //get github contribution
@@ -69,7 +78,7 @@ pub fn reply_message(cli: &mut slack::RtmClient, text_data: &str) {
     }
 
     //get meal information
-    if text_data.contains("ごはんルーレット") {
+    if is_meal_roulette(text_data) {
         match cli.send_message(CHANNEL, "今日の食事は") {
             Ok(_) => println!("sending_message"),
             Err(_) => println!("Error: can't send msg"),
