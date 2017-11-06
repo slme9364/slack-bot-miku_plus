@@ -70,58 +70,23 @@ pub fn reply_message(cli: &mut slack::RtmClient, text_data: &str) {
 
     //get meal information
     if text_data.contains("ごはんルーレット") {
-        if text_data.contains("昼") || text_data.contains("夜") ||
-           text_data.contains("カフェ") {
-            match cli.send_message(CHANNEL, "今日の食事は") {
-                Ok(_) => println!("sending_message"),
-                Err(_) => println!("Error: can't send msg"),
-            }
+        match cli.send_message(CHANNEL, "今日の食事は") {
+            Ok(_) => println!("sending_message"),
+            Err(_) => println!("Error: can't send msg"),
         }
         let end_txt = "です！";
-
-        //get lunch information
-        if text_data.contains("昼") {
-            let text_lunch = match rnd_meal::rnd_meal_lunch() {
-                Some(val) => val + end_txt,
-                None => return,
-            };
-            let text_lunch_str = text_lunch.as_str();
-            match cli.send_message(CHANNEL, text_lunch_str) {
-                Ok(_) => println!("sending_message"),
-                Err(_) => println!("Error: can't send msg"),
-            }
-            return;
+        let meal = match rnd_meal::rnd_meal(text_data) {
+            Some(val) => val + end_txt,
+            None => return,
+        };
+        let meal_str = meal.as_str();
+        match cli.send_message(CHANNEL, meal_str) {
+            Ok(_) => println!("sending_message"),
+            Err(_) => println!("Error: can't send msg"),
         }
-
-        //get dinner information
-        if text_data.contains("夜") {
-            let text_dinner = match rnd_meal::rnd_meal_dinner() {
-                Some(val) => val + end_txt,
-                None => return,
-            };
-            let text_dinner_str = text_dinner.as_str();
-            match cli.send_message(CHANNEL, text_dinner_str) {
-                Ok(_) => println!("sending_message"),
-                Err(_) => println!("Error: can't send msg"),
-            }
-            return;
-        }
-
-        //get cafe information
-        if text_data.contains("カフェ") {
-            let text_cafe = match rnd_meal::rnd_cafe() {
-                Some(val) => val + end_txt,
-                None => return,
-            };
-            let text_cafe_str = text_cafe.as_str();
-            match cli.send_message(CHANNEL, text_cafe_str) {
-                Ok(_) => println!("sending_message"),
-                Err(_) => println!("Error: can't send msg"),
-            }
-            return;
-        }
-
+        return;
     }
+
 
     //not use other function
     let index = match contains_msg(text_data) {
