@@ -8,7 +8,7 @@ use github;
 use rnd_meal;
 
 pub static CHANNEL: &'static str = "#random";
-//static CHANNEL: &'static str = "#test";
+//pub static CHANNEL: &'static str = "#test";
 
 //get contains keywords from doc/contains.txt
 fn contains_msg(msg: &str) -> Option<usize> {
