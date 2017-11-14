@@ -3,6 +3,7 @@ extern crate rustc_serialize;
 
 use self::rustc_serialize::json::Json;
 use reply;
+use gomi;
 
 fn pick_up_user_action(raw_json: &str) -> bool {
     //#test   channel id -> C45M040DA
@@ -60,6 +61,7 @@ impl slack::EventHandler for MyHandler {
     //keep connect
     fn on_ping(&mut self, cli: &mut slack::RtmClient) {
         println!("on_ping");
+        gomi::send_mention(cli);
     }
 
     //close connect

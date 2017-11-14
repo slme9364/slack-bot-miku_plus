@@ -5,6 +5,7 @@ mod github;
 mod rnd_meal;
 mod reply;
 mod my_handler;
+mod gomi;
 
 use std::time::Duration;
 use std::thread;

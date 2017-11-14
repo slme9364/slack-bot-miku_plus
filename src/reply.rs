@@ -7,7 +7,7 @@ use std::str;
 use github;
 use rnd_meal;
 
-static CHANNEL: &'static str = "#random";
+pub static CHANNEL: &'static str = "#random";
 //static CHANNEL: &'static str = "#test";
 
 //get contains keywords from doc/contains.txt

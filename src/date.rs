@@ -37,6 +37,21 @@ fn num_day(day_str: &str) -> &str {
     }
 }
 
+pub fn get_day_of_week() -> String {
+    let date_cmd = match Command::new("date").output() {
+        Ok(date) => date,
+        Err(_) => return String::new(),
+    };
+    let mut date_cmd_str = match str::from_utf8(&date_cmd.stdout) {
+        Ok(date) => date,
+        Err(_) => return String::new(),
+    };
+    date_cmd_str = str::trim_matches(date_cmd_str, '\n');
+    let date_cmd_split: Vec<&str> = date_cmd_str.split(' ').collect();
+
+    date_cmd_split[0].to_owned()
+}
+
 //get date from date command
 pub fn get_date() -> String {
     let date_cmd = match Command::new("date").output() {
