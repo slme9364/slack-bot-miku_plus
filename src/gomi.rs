@@ -19,7 +19,7 @@ pub fn send_mention(cli: &mut slack::RtmClient) {
     };
     unsafe {
         if day != today {
-            if today == "火" {
+            if today == "火" || today == "金" {
                 cli.send_message(CHANNEL, "今日は燃えるゴミの日です！");
             }
             if today == "月" {
